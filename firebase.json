@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "aridjaya-film",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

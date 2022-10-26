@@ -19,21 +19,15 @@
         <script src="./func.js"></script>
         <script>
             $(document).ready(function () {
-                var page = getParam("page");
-                page = Number(page);
-                if (!(page > 0)) {
-                    page = 1;
-                }
-                doPage(page);
-
+                var page = getParam("search");
+                $("#search").val(decodeURI(page));
                 $.ajax({
-                    url: "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=e" +
-                            "n-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
-                            page,
+                    url: "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY +
+                            "&page=1&query=" + page,
                     dataType: "json",
                     type: 'get',
                     success: function (data) {
-                        //console.log(data);
+                        console.log(data);
                         $("#api-back").css(
                             "background-image",
                             "url('https://image.tmdb.org/t/p/original/" + data.results[0].backdrop_path + "')"
@@ -69,9 +63,7 @@
                                 <h5 class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; ">` +
                                 title +
                                 `</h5>
-                                <p style="max-height:70px; overflow: hidden;" class="card-text">` +
-                                overview +
-                                `</p>
+                                <p class="card-text"></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                 <a href="./detail.html?id=` +
@@ -132,11 +124,8 @@
                                     autofocus="autofocus">
                                 <br>
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                                <br>
                             </form>
-                            <br>
-                            <nav aria-label="Page navigation">
-                                <ul id="main-page" class="pagination" style="justify-content: center;"></ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
